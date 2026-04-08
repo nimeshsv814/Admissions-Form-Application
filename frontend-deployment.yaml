@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admission-deploy
+  namespace: ad
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: admission
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      app: admission
+    spec:
+      containers:
+        - name: admission-cont
+          image: nimeshsv814/admission:latest
+          ports:
+            - containerPort: 3028
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: admission-secret
+                  key: MONGO_URI
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          

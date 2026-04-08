@@ -15,7 +15,8 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      app: admission
+      labels:
+        app: admission
     spec:
       containers:
         - name: admission-cont

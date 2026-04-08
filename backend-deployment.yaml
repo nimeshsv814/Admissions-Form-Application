@@ -15,7 +15,8 @@ spec:
       maxSurge: 1
   template:
     metadata:
-      app: mongodb
+      labels:
+        app: mongodb
     spec:
       containers:
         - name: mongodb-cont

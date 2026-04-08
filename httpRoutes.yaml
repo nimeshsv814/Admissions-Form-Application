@@ -5,7 +5,7 @@ metadata:
   namespace: ad
 spec:
   parentRefs:
-    - name: kgateway
+    - name: kgateway-gw
   rules:
     - matches:
         - path:
